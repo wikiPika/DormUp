@@ -1,25 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Layout from "./components/Layout";
+import ProfileCard from "./components/ProfileCard"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Layout>
+          <ProfileCard profileName={"Tymur Arsentiev"} profileImg={"https://img.quizur.com/f/img608039381dda94.72427060.jpg?lastEdited=1619015995"}age={24} school={"College of Lake County"} major={"Computer Science"} locStatus={"On Campus"} schStatus={"Grad"} bio={"Bruh moment"} />
+      </Layout>
   );
 }
 
