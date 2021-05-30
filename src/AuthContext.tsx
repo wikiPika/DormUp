@@ -2,8 +2,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { auth, db } from "./firebase";
 import Cookies from "js-cookie";
 import firebase from "firebase";
-
-
+import { useHistory } from "react-router-dom"; 
 interface currentUser {
   email: string;
   age: number;
@@ -17,9 +16,23 @@ interface currentUser {
 
 interface AuthContextProps {
   currentUser: currentUser;
-  login: any;
-  signOut: any;
-  signUp: any;
+  login: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  signUp: (
+    email: string,
+    displayName: string,
+    age: number,
+    bio: string,
+    college: string,
+    gender: string,
+    hobbies: string[],
+    major: string,
+    pfp: string,
+    year: number,
+    uid: string
+  ) => Promise<void>;
+  createUserWithGoogleSignIn: () => Promise<void>
+
 }
 
 function userFromSnapshot(
@@ -49,19 +62,37 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState<currentUser | null>();
   const [loading, setLoading] = useState(true);
+  const history = useHistory(); 
 
-  const signOut = () => {
+  async function signOut() {
     Cookies.remove("user");
-    return auth.signOut();
-  };
+    await auth.signOut();
+  }
 
-  async function login(email:string, password:string) {
-    const userDocs = await db
-      .collection("users")
-      .where("email", "==", email)
-      .get();
-    Cookies.set("user", userDocs.docs[0].data(), { expires: 7 });
-    return auth.signInWithEmailAndPassword(email, password);
+  async function login(email: string, password: string) {
+    const credential = await auth.signInWithEmailAndPassword(email, password);
+    if (credential.user) {
+      const userDocs = await db
+        .collection("users")
+        .where("email", "==", email)
+        .get();
+      Cookies.set("user", userDocs.docs[0].data(), { expires: 7 });
+    }
+  }
+  async function createUserWithGoogleSignIn() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const result = await firebase.auth().signInWithPopup(provider);
+      if (result.user) {
+        db.collection("users").doc(result.user.uid).set({
+          email: result.user.email,
+          name: result.user.displayName,
+        });
+      } 
+      history.push("/profile"); 
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function signUp(
@@ -96,7 +127,6 @@ export function AuthProvider({ children }) {
       Cookies.set("user", finalUser, { expires: 7 });
     } catch (error) {
       console.error(error);
-      return "Error creating user";
     }
   }
 
@@ -116,6 +146,7 @@ export function AuthProvider({ children }) {
     login,
     signUp,
     signOut,
+    createUserWithGoogleSignIn
   };
 
   return (

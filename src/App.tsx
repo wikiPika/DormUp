@@ -21,7 +21,7 @@ function App() {
         <Switch>
           <Layout>
             <PrivateRoute path="/search" component={ProfileSearch} />
-            <PrivateRoute component={Index} exact path="/" />
+            <Route component={Index} exact path="/" />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </Layout>

@@ -1,17 +1,18 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import "../css/login.css";
 import { Button, Card, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "aos/dist/aos.css";
-
+import { useAuth } from "../AuthContext";
+import firebase from "firebase";
 function Login() {
-  const location = useLocation();
-  useEffect(() => {
-    //todo: redirect user if they are already logged in
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { createUserWithGoogleSignIn } = useAuth()!;
+
 
   return (
     <React.Fragment>
@@ -34,6 +35,7 @@ function Login() {
                 className="btn btn-outline-dark"
                 role="button"
                 style={{ textTransform: "none" }}
+                onClick={createUserWithGoogleSignIn}
               >
                 <img
                   width="20px"
@@ -47,14 +49,22 @@ function Login() {
             <p className="text-center mt-1 text-black-50">or</p>
             <Form.Group>
               <Form.Label>Email:</Form.Label>
-              <Form.Control type="email" placeholder="Email" />
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <Form.Text className="text-black-50">
                 Enter the email you created your account with
               </Form.Text>
             </Form.Group>
             <Form.Group>
               <Form.Label>Password:</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </Form.Group>
             <Form.Group>
               <Button variant="primary">Login</Button>
