@@ -10,9 +10,10 @@ function ProfileCard(props) {
     return (
         <Card className="rounded border-bottom border-right m-3" style={{
             border: "0px 4px 4px 0px solid black",
+            maxWidth: "300px",
         }}>
             <Card.Body>
-                <Card.Img variant="top" src={props.profileImg}></Card.Img>
+                <Card.Img variant="top" src={props.profileImg}/>
                 <Card.Title>{props.profileName} ({props.age}{props.gender != "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
                     {props.major}
