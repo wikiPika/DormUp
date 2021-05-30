@@ -1,22 +1,20 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Navigation from "./Navbar";
 import Footer from "./Footer";
 
 function Layout(props) {
-
     return (
         <React.Fragment>
-            <Navigation/>
+            <Navigation />
             {props.children}
-            <Footer/>
+            <Footer />
         </React.Fragment>
     );
 }
 
 Layout.propTypes = {
     children: PropTypes.element.isRequired,
-}
+};
 
 export default Layout;
-
