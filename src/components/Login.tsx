@@ -1,3 +1,4 @@
+
 import {useLocation} from 'react-router-dom';
 import {useEffect} from "react";
 import React from "react";
@@ -23,7 +24,7 @@ function Login() {
                     <Form style={{width : '20vw', minWidth: '250px'}} >
                         <Form.Group>
                             <Button block variant="outline-dark" className="btn btn-outline-dark" role="button"
-                               style={{textTransform:"none"}}>
+                                    style={{textTransform:"none"}}>
                                 <img width="20px" style={{marginBottom:"3px", marginRight:"5px"}}
                                      alt="Google sign-in"
                                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>

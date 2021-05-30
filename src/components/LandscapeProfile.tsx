@@ -12,8 +12,8 @@ import {useState} from "react";
 function LandscapeProfile(props) {
     return(
         <div style={{
-            maxWidth: "80%",
-            margin: "0 auto"
+            maxWidth: "90%",
+            margin: "1vw 0vw 1vw 0vw"
         }}>
             <Row style={{margin: "0"}}>
                 <Col md={3}>
@@ -22,39 +22,39 @@ function LandscapeProfile(props) {
                         height: "auto",
                         aspectRatio: "1 / 1",
                         objectFit: "cover",
-                        border: "2px solid lightgray",
+                        border: "0.2vw solid lightgray",
                     }} />
                 </Col>
 
                 <Col md={9}>
                     <Card style={{
-                        borderWidth: "2px",
+                        borderWidth: "0.2vw",
                         borderStyle: "solid",
                         borderColor: "lightgray",
                         width: "100%",
                         height: "100%",
                     }}>
-                        <Card.Header style={{padding: "0.7vw"}}>
+                        <Card.Header style={{padding: "0.5vw"}}>
                             <div style={{padding: "0"}}>
                                 <Col style={{fontWeight: "bold", fontSize: "1vw", paddingLeft: "0", paddingRight: "0"}}>
-                                    {props.profileName} ({props.age})
+                                    {props.profileName} ({props.age}, {props.gender})
                                 </Col>
                                 <Col className="text-muted card-subtitle" style={{textAlign: "right", fontSize: "0.8vw", paddingLeft: "0", paddingRight: "0"}}>
                                     {props.major} @ {props.school}
                                 </Col>
                             </div>
                         </Card.Header>
-                        <Card.Body style={{padding: "0.7vw"}}>
+                        <Card.Body style={{padding: "0.5vw"}}>
                             <div style={{height: "4.8vw", overflow: "auto", fontSize: "0.8vw", textOverflow: "ellipsis"}}>
                                 {props.bio}
                             </div>
                         </Card.Body>
-                        <Card.Footer style={{height: "auto", textAlign: "left", justifyContent: "center", padding: "6px 4px 10px 4px"}}>
+                        <Card.Footer style={{height: "auto", textAlign: "left", justifyContent: "center", padding: "0.2vw 0.2vw 0.2vw 0.1vw"}}>
                             <Row>
-                                <Col>
+                                <Col md={10}>
                                     {getTags(props.tag)}
                                 </Col>
-                                <Col style={{textAlign: "right"}}>
+                                <Col md={2}style={{textAlign: "right", justifyContent: "middle"}}>
                                     <OverlayTrigger
                                         trigger="click"
                                         placement="left"
@@ -66,10 +66,15 @@ function LandscapeProfile(props) {
                                         rootClose={true}
                                     >
                                         <Button style={{
-                                            height: "100%",
-                                            padding: "0",
-                                            fontSize: "12",
-                                            width: "3vw"
+                                            padding: "0vw",
+                                            fontSize: "0.8vw",
+                                            width: "4.5vw",
+                                            height: "1.5vw",
+                                            borderRadius: "0.5vw 0vw 0vw 0vw",
+                                            margin: "0 auto",
+                                            display: "inline-block",
+                                            verticalAlign: "middle",
+                                            textAlign: "center",
                                         }}>Request</Button>
                                     </OverlayTrigger>
                                 </Col>

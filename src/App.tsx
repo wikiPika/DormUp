@@ -15,25 +15,25 @@ import Register from "./components/Register";
 function App() {
   useEffect(() => AOS.init());
   return (
-    <Router>
-      <AuthProvider>
-        <Switch>
-          <Layout>
-            <Route path="/search">
-              <ProfileSearch />
-            </Route>
-            <Route path="/" exact>
-              <Index />
-            </Route>
-            <Route path="/login">
-              <Login/>
-            </Route>
-            <Route path="/register">
-              <Register/>
-            </Route>
-          </Layout>
-        </Switch>
-      </AuthProvider>
+      <Router>
+        <AuthProvider>
+          <Switch>
+            <Layout>
+              <Route path="/search">
+                <ProfileSearch />
+              </Route>
+              <Route path="/" exact>
+                <Index />
+              </Route>
+              <Route path="/login">
+                <Login/>
+              </Route>
+              <Route path="/register">
+                <Register/>
+              </Route>
+            </Layout>
+          </Switch>
+       </AuthProvider>
     </Router>
   );
 }

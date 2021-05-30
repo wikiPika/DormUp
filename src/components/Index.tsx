@@ -7,7 +7,7 @@ import LandscapeProfile from "./LandscapeProfile";
 
 function Index(props){
     return (
-        <React.Fragment>
+        <div>
             <Jumbotron data-aos="flip-left" className="shadow mb-0">
                 <ProfileCard profileName={"Tymur Arsentiev"}
                              profileImg={"https://img.quizur.com/f/img608039381dda94.72427060.jpg?lastEdited=1619015995"}
@@ -41,7 +41,7 @@ function Index(props){
                     tag={["drinking", "driving", "drinking while driving", "undergrad", "on campus"]}
                     bio={"This is a really long bio. This is a really long bio. This is a really long bio. This is a really long bio. This is a really long bio. "}/>
             </Jumbotron>
-        </React.Fragment>
+        </div>
     );
 }
 export default Index;
