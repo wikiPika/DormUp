@@ -1,3 +1,9 @@
 .card {
-    max-width: 300px;
+    max-width: 45%;
+    border-width: 0px 4px 4px 0px;
+    border-color: black;
+}
+
+.outerDiv#child {
+    margin: 0 auto;
 }
