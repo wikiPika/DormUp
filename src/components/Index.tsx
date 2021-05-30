@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import ProfileCard from "./ProfileCard";
-import "@fortawesome/fontawesome-free/css/all.min.css"
+// import "@fortawesome/fontawesome-free/css/all.min.css"
 import {Jumbotron} from "react-bootstrap";
 import '../css/index.css';
 
