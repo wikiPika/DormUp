@@ -9,5 +9,29 @@
     position: relative;
     top: 0;
     left: 50%;
-    transform: translateY(-90%);
+    transform: translateY(-50%);
+}
+
+.lead {
+    font-size : 3vh;
+}
+
+.display-5 {
+    font-size: 4vh;
+}
+
+.horizontal-index {
+    background-color: #f8f9fa
+}
+
+@media screen and (max-width: 1265px){
+    .text-desc {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 1070px) {
+    .text-desc {
+        position: static;
+    }
 }

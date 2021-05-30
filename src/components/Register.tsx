@@ -40,8 +40,8 @@ function Register(){
                         <Form.Text className="text-black-50">Your DOB will not be shown, only your age</Form.Text>
                     </Form.Group>
                     <Form.Group>
-                        <Button variant="primary" type="submit">Register</Button>
-                        <Form.Text><Link to="/login" style={{color : 'inherit'}}>Already have an account?</Link></Form.Text>
+                        <Button variant="primary" type="submit" block>Register</Button>
+                        <Form.Text className="text-center"><Link to="/login" style={{color : 'inherit'}}>Already have an account?</Link></Form.Text>
                     </Form.Group>
                 </Form>
             </Card.Body>

@@ -39,7 +39,7 @@ function Navigation(props)
                     </Form>
                     <Nav className="ml-auto">
                         <Nav.Link>
-                            <DropdownButton title="Account" variant="outline-primary">
+                            <DropdownButton className="mr-5" title="Account" variant="outline-primary">
                                 {isAuth ?
                                     <React.Fragment>
                                         <DropdownItem>Profile</DropdownItem>
