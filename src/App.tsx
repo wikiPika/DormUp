@@ -16,43 +16,17 @@ import PrivateRoute from "./components/PrivateRoute";
 function App() {
   useEffect(() => AOS.init());
   return (
-<<<<<<< HEAD
     <Router>
       <AuthProvider>
         <Switch>
           <Layout>
             <PrivateRoute path="/search" component={ProfileSearch} />
             <PrivateRoute component={Index} exact path="/" />
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Layout>
         </Switch>
       </AuthProvider>
-=======
-      <Router>
-        <AuthProvider>
-          <Switch>
-            <Layout>
-              <Route path="/search">
-                <ProfileSearch />
-              </Route>
-              <Route path="/" exact>
-                <Index />
-              </Route>
-              <Route path="/login">
-                <Login/>
-              </Route>
-              <Route path="/register">
-                <Register/>
-              </Route>
-            </Layout>
-          </Switch>
-       </AuthProvider>
->>>>>>> 319fdce7414b6ff9c64ef0e3cd06d1bf3bb7cc5e
     </Router>
   );
 }
