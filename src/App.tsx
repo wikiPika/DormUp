@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Layout from "./components/Layout";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileCard from "./components/ProfileCard";
 import ProfileSearch from "./components/ProfileSearch";
@@ -15,9 +15,16 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Layout>
-          <Route link="/" exact component={Index} />
-        </Layout>
+        <Switch>
+          <Layout>
+            <Route path="/search">
+              <ProfileSearch />
+            </Route>
+            <Route path="/">
+              <Index />
+            </Route>
+          </Layout>
+        </Switch>
       </AuthProvider>
     </Router>
   );
