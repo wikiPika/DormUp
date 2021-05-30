@@ -1,8 +1,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { auth, db } from "./firebase";
+import { auth, db } from "./fb";
 import Cookies from "js-cookie";
 import firebase from "firebase";
-import { useHistory } from "react-router-dom"; 
+import { useHistory } from "react-router-dom";
 interface currentUser {
   email: string;
   age: number;
@@ -44,7 +44,7 @@ function userFromSnapshot(
     user.age = data.age;
     user.email = data.email;
     user.college = data.college;
-    user.displayName = data.displayName;
+    user.displayName = (data.first_name + " " + data.last_name);
     user.gender = data.gender;
     user.major = data.major;
     user.hobbies = data.hobbies;
@@ -62,7 +62,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState<currentUser | null>();
   const [loading, setLoading] = useState(true);
-  const history = useHistory(); 
+  const history = useHistory();
 
   async function signOut() {
     Cookies.remove("user");
@@ -89,12 +89,12 @@ export function AuthProvider({ children }) {
           email: result.user.email,
           name: result.user.displayName,
         });
-        const finalUserDoc = await db.collection('users').doc(result.user.uid).get(); 
+        const finalUserDoc = await db.collection('users').doc(result.user.uid).get();
         const finalUser = userFromSnapshot(finalUserDoc);
-        setCurrentUser(finalUser); 
-      } 
-     
-      history.push("/profile"); 
+        setCurrentUser(finalUser);
+      }
+
+      history.push("/profile");
     } catch (error) {
       console.error(error);
     }

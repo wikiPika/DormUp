@@ -7,7 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "aos/dist/aos.css";
 import { useAuth } from "../AuthContext";
-import { db, auth } from "../firebase";
+import { db, auth } from "../fb";
 
 function Login() {
   const [email, setEmail] = useState("");

@@ -17,7 +17,7 @@ import "../../node_modules/aos/dist/aos.css";
 import "../../node_modules/aos/dist/aos.js";
 import {getTags} from "./ProfileCard"
 import LandscapeProfile from "./LandscapeProfile";
-import {db} from "../firebase";
+import {db} from "../fb";
 
 function ProfileSearch(props) {
     const [searchTags, setSearchTags] = useState([""]);
@@ -144,7 +144,7 @@ async function getTenProfilesDefault(page) {
     let start = page * 10;
     let end = (page + 1) * 10;
 
-    await db.collection("users").limit(end).get()
+    await db.collection("users").where("first_name", "!=", "undefined").limit(end).get()
         .then(query => {
             query.forEach(doc => {
                 if (ptr >= start && ptr < end) {
@@ -180,7 +180,7 @@ async function getTenProfiles(tags, userGender, page) {
     let key = 0;
 
     if (tags.length === 1 && tags[0] === "") {
-        await db.collection("users").get()
+        await db.collection("users").where("first_name", "!=", "undefined").get()
             .then((query) => {
                 query.forEach((doc) => {
                     if (ptr >= start && ptr < end) {
@@ -206,7 +206,7 @@ async function getTenProfiles(tags, userGender, page) {
             })
     }
     else {
-        await db.collection("users").where("tags", "array-contains-any", tags).get()
+        await db.collection("users").where("tags", "array-contains-any", tags).where("first_name", "!=", "undefined").get()
             .then((query) => {
                 query.forEach((doc) => {
                     let data = doc.data();

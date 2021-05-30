@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import "../css/navbar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"
-import { auth } from "../firebase";
+import { auth } from "../fb";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Link} from 'react-router-dom';
 
@@ -54,7 +54,9 @@ function Navigation(props)
                                         <DropdownItem href="/login" onClick={() => {
                                             window.location.href = "/login"
                                         }}>Login</DropdownItem>
-                                        <DropdownItem href="/register">Register</DropdownItem>
+                                        <DropdownItem href="/register" onClick={() => {
+                                            window.location.href = "/register"
+                                        }}>Register</DropdownItem>
                                     </React.Fragment>
                                 }
 
