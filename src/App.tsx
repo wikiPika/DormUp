@@ -11,6 +11,7 @@ import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   useEffect(() => AOS.init());
@@ -19,17 +20,13 @@ function App() {
       <AuthProvider>
         <Switch>
           <Layout>
-            <Route path="/search">
-              <ProfileSearch />
-            </Route>
-            <Route path="/" exact>
-              <Index />
-            </Route>
+            <PrivateRoute path="/search" component={ProfileSearch} />
+            <PrivateRoute component={Index} exact path="/" />
             <Route path="/login">
-              <Login/>
+              <Login />
             </Route>
             <Route path="/register">
-              <Register/>
+              <Register />
             </Route>
           </Layout>
         </Switch>
