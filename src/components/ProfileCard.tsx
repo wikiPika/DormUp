@@ -2,7 +2,6 @@ import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 import PropType from "prop-types";
 import {Fragment} from "react";
-import {Container, Row, Col, Image, Badge} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/css/bootstrap.css"
 
@@ -38,24 +37,24 @@ function ProfileCard(props) {
 export function getTags(list) {
     let result: JSX.Element[] = [];
 
-    if (list.length == 0 || (list.length == 1 && list[0] == "")) return <div></div>
+    if (list.length === 0 || (list.length === 1 && list[0] === "")) return <div></div>
 
     // @ts-ignore
     list = [...new Set(list)]
 
     list.forEach(tag => result.push(
         <div style={{
-            borderRadius: 4,
-            border: "1px solid black",
-            fontSize: 12,
+            borderRadius: "0.2vw",
+            border: "0.1vw solid black",
+            fontSize: "0.75vw",
             textAlign: "center",
             fontWeight: "bold",
             backgroundColor: "#444444",
             color: "white",
             verticalAlign: "middle",
             display: "inline-block",
-            padding: "0px 6px 0px 6px",
-            margin: "0px 2px 0px 2px",
+            padding: "0vw 0.4vw 0vw 0.4vw",
+            margin: "0.125vw 0.125vw 0.125vw 0.125vw",
         }} key={tag}>
             {tag}
         </div>
