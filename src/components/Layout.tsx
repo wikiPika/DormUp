@@ -5,14 +5,13 @@ import Footer from "./Footer";
 
 function Layout(props) {
 
-
-
     return (
         <React.Fragment>
             <Navigation/>
             {props.children}
             <Footer/>
-        </React.Fragment>);
+        </React.Fragment>
+    );
 }
 
 Layout.propTypes = {
