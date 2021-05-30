@@ -5,8 +5,6 @@ import Footer from "./Footer";
 
 function Layout(props) {
 
-
-
     return (
         <React.Fragment>
             <Navigation/>

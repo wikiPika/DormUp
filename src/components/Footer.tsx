@@ -1,4 +1,7 @@
 function Footer(props:any){
-    return (<footer></footer>);
+    return (
+        <footer>
+
+        </footer>);
 }
 export default Footer;
