@@ -20,11 +20,7 @@ function App() {
       <AuthProvider>
         <Switch>
           <Layout>
-<<<<<<< HEAD
             <PrivateRoute path="/search" component={ProfileSearch} />
-=======
-            <Route path="/search" component={ProfileSearch} />
->>>>>>> d6679cea63cb345a2f8333275b891c3becac7423
             <Route component={Index} exact path="/" />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
