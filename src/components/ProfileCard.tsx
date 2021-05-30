@@ -13,13 +13,8 @@ function ProfileCard(props) {
             maxWidth: "300px",
         }}>
             <Card.Body>
-<<<<<<< HEAD
-                <Card.Img variant="top" src={props.profileImg}/>
-                <Card.Title>{props.profileName} ({props.age}{props.gender != "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
-=======
                 <Card.Img variant="top" src={props.profileImg}></Card.Img>
                 <Card.Title>{props.profileName} ({props.age}{props.gender !== "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
->>>>>>> 8f4ed5fad63d8952ccea6a9c4f5a79ba41a8a280
                 <Card.Subtitle className="mb-2 text-muted">
                     {props.major}
                     <br />

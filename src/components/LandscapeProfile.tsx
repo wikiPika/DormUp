@@ -1,45 +1,4 @@
 import PropType from "prop-types";
-<<<<<<< HEAD
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-
-function LandscapeProfile(props) {
-    return(
-        <Card className="d-flex landscape-prof" style={{maxWidth: '50%'}}>
-            <Row>
-                <Col className="ml-auto" style={{maxWidth: '300px'}}>
-                    <Card.Img src={props.profileImg} style={{maxWidth:'300px'}}/>
-                </Col>
-                <Col>
-                    <Card.Body>
-                        <Row>
-                            <Col className="font-weight-bold">
-                                {props.profileName}
-                            </Col>
-                            <Col style={{textAlign:'right'}} className="text-muted card-subtitle">
-                                {props.major}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className="font-weight-bold">
-                                ({props.age}, {props.gender})
-                            </Col>
-                            <Col style={{textAlign:'right'}} className="text-muted card-subtitle">
-                                {props.school}
-                            </Col>
-                        </Row>
-                        <Row className="card-text mt-3 text-body">
-                            {props.bio}
-                        </Row>
-                        <Row className="??? mt-4">
-                            Put tags here
-                        </Row>
-                    </Card.Body>
-                </Col>
-            </Row>
-        </Card>
-=======
 import {Container, Popover, OverlayTrigger, Tooltip} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -92,35 +51,34 @@ function LandscapeProfile(props) {
                         </Card.Body>
                         <Card.Footer style={{height: "auto", textAlign: "left", justifyContent: "center", padding: "6px 4px 10px 4px"}}>
                             <Row>
-                            <Col>
-                                {getTags(props.tag)}
-                            </Col>
-                            <Col style={{textAlign: "right"}}>
-                                <OverlayTrigger
-                                    trigger="click"
-                                    placement="left"
-                                    overlay={
-                                        <Tooltip id="button-tooltip" {...props}>
-                                            Your request has been sent to <strong>{props.profileName}</strong>! Please wait for them to contact you back.
-                                        </Tooltip>
-                                    }
-                                    rootClose={true}
-                                >
-                                    <Button style={{
-                                        height: "100%",
-                                        padding: "0",
-                                        fontSize: "12",
-                                        width: "3vw"
-                                    }}>Request</Button>
-                                </OverlayTrigger>
-                            </Col>
+                                <Col>
+                                    {getTags(props.tag)}
+                                </Col>
+                                <Col style={{textAlign: "right"}}>
+                                    <OverlayTrigger
+                                        trigger="click"
+                                        placement="left"
+                                        overlay={
+                                            <Tooltip id="button-tooltip" {...props}>
+                                                Your request has been sent to <strong>{props.profileName}</strong>! Please wait for them to contact you back.
+                                            </Tooltip>
+                                        }
+                                        rootClose={true}
+                                    >
+                                        <Button style={{
+                                            height: "100%",
+                                            padding: "0",
+                                            fontSize: "12",
+                                            width: "3vw"
+                                        }}>Request</Button>
+                                    </OverlayTrigger>
+                                </Col>
                             </Row>
                         </Card.Footer>
                     </Card>
                 </Col>
             </Row>
         </div>
->>>>>>> 8f4ed5fad63d8952ccea6a9c4f5a79ba41a8a280
     )
 }
 
@@ -146,8 +104,4 @@ LandscapeProfile.defaultProps = {
     bio: "N/A",
 }
 
-<<<<<<< HEAD
 export default LandscapeProfile;
-=======
-export default LandscapeProfile;
->>>>>>> 8f4ed5fad63d8952ccea6a9c4f5a79ba41a8a280
