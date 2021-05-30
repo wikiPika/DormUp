@@ -11,6 +11,7 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 // import Container from "react-bootstrap/Container";
 import "../css/navbar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"
+import { auth } from "../firebase";
 
 function Navigation(props)
 {
@@ -40,13 +41,19 @@ function Navigation(props)
                             <DropdownButton title="Account" variant="outline-primary">
                                 {isAuth ?
                                     <React.Fragment>
-                                        <DropdownItem>My info</DropdownItem>
                                         <DropdownItem>Profile</DropdownItem>
+                                        <DropdownItem onClick={() => {
+                                            auth.signOut().then(() => {
+                                                setAuth(!isAuth);
+                                            });
+                                        }}>Logout</DropdownItem>
                                     </React.Fragment>
                                     :
                                     <React.Fragment>
-                                        <DropdownItem>Login</DropdownItem>
-                                        <DropdownItem>Register</DropdownItem>
+                                        <DropdownItem href="/login" onClick={() => {
+                                            window.location.href = "/login"
+                                        }}>Login</DropdownItem>
+                                        <DropdownItem href="/register">Register</DropdownItem>
                                     </React.Fragment>
                                 }
 
