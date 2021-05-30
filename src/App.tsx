@@ -33,8 +33,8 @@ function App() {
               </Route>
             </Layout>
           </Switch>
-        </AuthProvider>
-      </Router>
+       </AuthProvider>
+    </Router>
   );
 }
 
