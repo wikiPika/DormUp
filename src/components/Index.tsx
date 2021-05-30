@@ -5,7 +5,7 @@ import {Jumbotron} from "react-bootstrap";
 import '../css/index.css';
 import LandscapeProfile from "./LandscapeProfile";
 
-function Index(props){//aaa
+function Index(props){
     return (
         <React.Fragment>
             <Jumbotron data-aos="flip-left" className="shadow mb-0">
