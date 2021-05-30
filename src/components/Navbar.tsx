@@ -8,10 +8,11 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import DropdownItem from "react-bootstrap/DropdownItem";
-// import Container from "react-bootstrap/Container";
 import "../css/navbar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import { auth } from "../firebase";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Link} from 'react-router-dom';
 
 function Navigation(props)
 {
@@ -21,14 +22,14 @@ function Navigation(props)
 
         <Navbar bg="light" expand="md">
             <div className={"container-fluid"}>
-                <Navbar.Brand href=""><i className="fas fa-university"/></Navbar.Brand>
+                <Navbar.Brand href=""><Link to="/"><i className="fas fa-university"/></Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto d-flex">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link><Link to="/" style={{color: 'inherit', textDecoration : 'inherit'}}>Home</Link></Nav.Link>
                         <NavDropdown title="Find" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/dorms">Dorms</NavDropdown.Item>
-                            <NavDropdown.Item href="/search">Dormmates</NavDropdown.Item>
+                            <NavDropdown.Item href="/search">Dorm-mates</NavDropdown.Item>
                             <NavDropdown.Item href="/colleges">Colleges</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
