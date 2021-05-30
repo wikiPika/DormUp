@@ -30,7 +30,7 @@ function Navigation(props)
                         <NavDropdown title="Find" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/dorms">Dorms</NavDropdown.Item>
                             <NavDropdown.Item href="/search">Dorm-mates</NavDropdown.Item>
-                            <NavDropdown.Item href="/colleges">Colleges</NavDropdown.Item>
+                            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Form inline>
