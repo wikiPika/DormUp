@@ -1,6 +1,18 @@
 import PropType from "prop-types"
 import {useState, useEffect} from "react"
-import {Button, Jumbotron, Row, Col, Image, Form, FormGroup, FormControl, InputGroup, FormCheck} from "react-bootstrap"
+import {
+    Button,
+    Jumbotron,
+    Row,
+    Col,
+    Image,
+    Form,
+    FormGroup,
+    FormControl,
+    InputGroup,
+    FormCheck,
+    Pagination
+} from "react-bootstrap"
 import "../../node_modules/aos/dist/aos.css";
 import "../../node_modules/aos/dist/aos.js";
 import {getTags} from "./ProfileCard"
@@ -9,15 +21,15 @@ import {db} from "../firebase";
 
 function ProfileSearch(props) {
     const [searchTags, setSearchTags] = useState([""]);
-    const [pageNumber, setPageNumber] = useState(1);
     const [location, setLocation] = useState("");
+    const [page, setPage] = useState(0);
     // MF = all
     const [gender, setGender] = useState(["M", "F"]);
     const [results, setResults] = useState([<div />]);
 
     useEffect( () => {
         const load = async () => {
-            let data = await getTenProfilesDefault();
+            let data = await getTenProfiles(searchTags, gender, page);
             setResults(data)
         }
 
@@ -26,7 +38,7 @@ function ProfileSearch(props) {
 
     return (
         <div data-aos="flip-left" data-aos-anchor-placement="top" data-aos-delay="150">
-            <Jumbotron >
+            <Jumbotron>
                 <h1 style={{
                     fontSize: "5vw",
                 }}>Find a Dormmate</h1>
@@ -73,29 +85,46 @@ function ProfileSearch(props) {
                                 height: "2.5vw",
                             }} onChange={e => setLocation(e.target.value)}/>
                         </Form.Group>
-                        <div style={{
+                        <Form.Group style={{
                             textAlign: "center",
                             fontSize: "1.5vw",
                             margin: "1.5vw 0vw 0.25vw 0vw",
+                        }} onChange={e => {
+                            let val = e.target.value;
+
+                            if (val === "mf") setGender(["M", "F"])
+                            if (val === "m") setGender(["M"])
+                            if (val === "f") setGender(["F"])
                         }}>
-                        <FormCheck inline type="radio" name="gender-checkbox" id="checkboxAny" label="All" onChange={e => setGender(["M", "F"])}/>
-                        <FormCheck inline type="radio" name="gender-checkbox" id="checkboxMale" label="Male" onChange={e => setGender(["M"])} />
-                        <FormCheck inline type="radio" name="gender-checkbox" id="checkboxFemale" label="Female" onChange={e => setGender(["F"])} />
-                        </div>
-                        <div style={{
-                            textAlign: "center",
-                            fontSize: "1.5vw",
-                            margin: "1.5vw 0vw 0.25vw 0vw",
-                        }}>
-                            <Button variant="primary" onClick={async () => {
-                                setResults(await getTenProfiles(searchTags, gender, pageNumber))
-                            }}>Submit</Button>
-                        </div>
+                            <FormCheck inline type="radio" value={"mf"}  name="gender-checkbox" id="checkboxAny" label="All" />
+                            <FormCheck inline type="radio" value={"m"} name="gender-checkbox" id="checkboxMale" label="Male" />
+                            <FormCheck inline type="radio" value={"f"} name="gender-checkbox" id="checkboxFemale" label="Female"/>
+                        </Form.Group>
                     </Form>
                     <div style={{
                         margin: "4px 0px -6px -2px",
                     }}>
+                        Tags
+                        <br />
                         {getTags(searchTags)}
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
+                        <Pagination style={{
+                            textAlign: "center",
+                            fontSize: "1.5vw",
+                            margin: "1vw 0vw 0vw 0vw",
+                        }}>
+                            <Pagination.Prev onClick={() => {
+                                if (page != 0) setPage(page - 1)
+                            }} />
+                            <Pagination.Item active>{page + 1}</Pagination.Item>
+                            <Pagination.Next onClick={() => {
+                                if (results.length === 10) setPage(page + 1)
+                            }}/>
+                        </Pagination>
                     </div>
                 </Col>
 
@@ -107,48 +136,25 @@ function ProfileSearch(props) {
     );
 }
 
-async function getTenProfilesDefault() {
+async function getTenProfilesDefault(page) {
     let r: Array<JSX.Element> = []
     let key = 0;
-    await db.collection("users").limit(10).get()
+
+    let ptr = 0;
+    let start = page * 10;
+    let end = (page + 1) * 10;
+
+    await db.collection("users").limit(end).get()
         .then(query => {
             query.forEach(doc => {
-                let data = doc.data();
-
-                r.push(<LandscapeProfile profileName={data.first_name + data.last_name}
-                                         profileImg={data.pfp}
-                                         age={data.age}
-                                         gender={data.gender}
-                                         school={data.school}
-                                         major={data.major}
-                                         tag={data.tags}
-                                         bio={data.bio}
-                                         key={key}
-
-                />)
-                key++;
-            })
-        })
-    return r;
-}
-
-async function getTenProfiles(tags, userGender, page) {
-    let r: Array<JSX.Element> = []
-    let key = 0;
-    await db.collection("users").where("tags", "array-contains-any", tags).orderBy("age").startAt(page * 10).endAt((page + 1) * 10).limit(10).get()
-        .then((query) => {
-            query.forEach((doc) => {
-                let data = doc.data();
-                console.log(data);
-
-                if (userGender.contains(data.gender)) {
+                if (ptr >= start && ptr < end) {
+                    let data = doc.data();
                     let name: string = data.first_name + " " + data.last_name;
-
                     r.push(<LandscapeProfile profileName={name}
                                              profileImg={data.pfp}
                                              age={data.age}
                                              gender={data.gender}
-                                             school={data.college}
+                                             school={data.school}
                                              major={data.major}
                                              tag={data.tags}
                                              bio={data.bio}
@@ -157,8 +163,71 @@ async function getTenProfiles(tags, userGender, page) {
                     />)
                     key++;
                 }
+                ptr++;
             })
         })
+    return r;
+}
+
+async function getTenProfiles(tags, userGender, page) {
+    if ((tags.length === 1 && tags[0] === "") && (userGender[0] === "M" && userGender[1] === "F")) return await getTenProfilesDefault(page);
+    let r: Array<JSX.Element> = []
+
+    let ptr = 0;
+    let start = page * 10;
+    let end = (page + 1) * 10;
+
+    let key = 0;
+
+    if (tags.length === 1 && tags[0] === "") {
+        await db.collection("users").get()
+            .then((query) => {
+                query.forEach((doc) => {
+                    if (ptr >= start && ptr < end) {
+                        let data = doc.data();
+                        if (userGender.includes(data.gender)) {
+                            let name: string = data.first_name + " " + data.last_name;
+                            r.push(<LandscapeProfile profileName={name}
+                                                     profileImg={data.pfp}
+                                                     age={data.age}
+                                                     gender={data.gender}
+                                                     school={data.college}
+                                                     major={data.major}
+                                                     tag={data.tags}
+                                                     bio={data.bio}
+                                                     key={key}
+
+                            />)
+                            key++;
+                        }
+                    }
+                    ptr++;
+                })
+            })
+    }
+    else {
+        await db.collection("users").where("tags", "array-contains-any", tags).get()
+            .then((query) => {
+                query.forEach((doc) => {
+                    let data = doc.data();
+                    if (userGender.includes(data.gender)) {
+                        let name: string = data.first_name + " " + data.last_name;
+                        r.push(<LandscapeProfile profileName={name}
+                                                 profileImg={data.pfp}
+                                                 age={data.age}
+                                                 gender={data.gender}
+                                                 school={data.college}
+                                                 major={data.major}
+                                                 tag={data.tags}
+                                                 bio={data.bio}
+                                                 key={key}
+
+                        />)
+                        key++;
+                    }
+                })
+            })
+    }
 
     return r;
 }

@@ -1,0 +1,29 @@
+#foot {
+    width : 100%;
+    background-color : #e9e9e9;
+}
+
+#facebook {
+    color : #4267B2;
+}
+
+#instagram {
+    color : #C13584;
+}
+
+#twitter {
+    color : #1DA1F2;
+}
+
+#reddit {
+    color : #FF4500;
+}
+
+.icon {
+    font-size : 70px;
+    border-right: 10px #1DA1F2;
+}
+
+.mid {
+    font-size: 20px;
+}
