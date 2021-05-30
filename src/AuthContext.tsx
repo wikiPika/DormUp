@@ -77,6 +77,7 @@ export function AuthProvider({ children }) {
         .where("email", "==", email)
         .get();
       Cookies.set("user", userDocs.docs[0].data(), { expires: 7 });
+      history.push("/");
     }
   }
   async function createUserWithGoogleSignIn() {
@@ -84,11 +85,15 @@ export function AuthProvider({ children }) {
     try {
       const result = await firebase.auth().signInWithPopup(provider);
       if (result.user) {
-        db.collection("users").doc(result.user.uid).set({
+        await db.collection("users").doc(result.user.uid).set({
           email: result.user.email,
           name: result.user.displayName,
         });
+        const finalUserDoc = await db.collection('users').doc(result.user.uid).get(); 
+        const finalUser = userFromSnapshot(finalUserDoc);
+        setCurrentUser(finalUser); 
       } 
+     
       history.push("/profile"); 
     } catch (error) {
       console.error(error);
