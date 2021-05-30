@@ -1,5 +1,13 @@
+
 .text-desc {
     position: absolute;
     top: 40%;
     right: 200px;
+}
+
+.landscape-prof {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateY(-90%);
 }

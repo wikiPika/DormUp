@@ -10,10 +10,11 @@ function ProfileCard(props) {
     return (
         <Card className="rounded border-bottom border-right m-3" style={{
             border: "0px 4px 4px 0px solid black",
+            maxWidth: "300px",
         }}>
             <Card.Body>
                 <Card.Img variant="top" src={props.profileImg}></Card.Img>
-                <Card.Title>{props.profileName} ({props.age}{props.gender != "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
+                <Card.Title>{props.profileName} ({props.age}{props.gender !== "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
                     {props.major}
                     <br />
@@ -34,8 +35,13 @@ function ProfileCard(props) {
     );
 }
 
-function getTags(list) {
+export function getTags(list) {
     let result: JSX.Element[] = [];
+
+    if (list.length == 0 || (list.length == 1 && list[0] == "")) return <div></div>
+
+    // @ts-ignore
+    list = [...new Set(list)]
 
     list.forEach(tag => result.push(
         <div style={{
@@ -50,7 +56,7 @@ function getTags(list) {
             display: "inline-block",
             padding: "0px 6px 0px 6px",
             margin: "0px 2px 0px 2px",
-        }}>
+        }} key={tag}>
             {tag}
         </div>
         /*<Fragment><Badge pill variant={"info"}>
