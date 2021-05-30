@@ -38,7 +38,7 @@ function ProfileSearch(props) {
 
     return (
         <div data-aos="flip-left" data-aos-anchor-placement="top" data-aos-delay="150">
-            <Jumbotron >
+            <Jumbotron>
                 <h1 style={{
                     fontSize: "5vw",
                 }}>Find a Dormmate</h1>
@@ -144,15 +144,10 @@ async function getTenProfilesDefault(page) {
     let start = page * 10;
     let end = (page + 1) * 10;
 
-    console.log(page)
-    console.log(start)
-    console.log(end)
-
     await db.collection("users").limit(end).get()
         .then(query => {
             query.forEach(doc => {
                 if (ptr >= start && ptr < end) {
-                    console.log("printing")
                     let data = doc.data();
                     let name: string = data.first_name + " " + data.last_name;
                     r.push(<LandscapeProfile profileName={name}
@@ -171,7 +166,6 @@ async function getTenProfilesDefault(page) {
                 ptr++;
             })
         })
-    console.log(r)
     return r;
 }
 
