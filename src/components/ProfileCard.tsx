@@ -8,37 +8,29 @@ import "bootstrap/dist/css/bootstrap.css"
 
 function ProfileCard(props) {
     return (
-        <Container>
-            <Row className="justify-content-md-center">
-                <Col md="auto">
-                    <Image src={props.profileImg} fluid></Image>
-                </Col>
-                <Col>
-                    <Card className="rounded border-bottom border-right m-3" style={{
-                        border: "0px 4px 4px 0px solid black",
+        <Card className="rounded border-bottom border-right m-3" style={{
+            border: "0px 4px 4px 0px solid black",
+        }}>
+            <Card.Body>
+                <Card.Img variant="top" src={props.profileImg}></Card.Img>
+                <Card.Title>{props.profileName} ({props.age}{props.gender != "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">
+                    {props.major}
+                    <br />
+                    {props.school}
+                </Card.Subtitle>
+                <Card.Text>
+                    {props.bio}
+                    <br />
+                    <div style={{
+                        margin: "4px 0px -6px -2px",
                     }}>
-                        <Card.Body>
-                            <Card.Title>{props.profileName} ({props.age}{props.gender != "N/A" ? <Fragment>, {props.gender}</Fragment> : <Fragment></Fragment>})</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">
-                                {props.major}
-                                <br />
-                                {props.school}
-                            </Card.Subtitle>
-                            <Card.Text>
-                                {props.bio}
-                                <br />
-                                <div style={{
-                                    margin: "4px 0px -6px -2px",
-                                }}>
-                                    {getTags(props.tag)}
-                                </div>
-                            </Card.Text>
-                            <Button variant="primary" className="align-self-auto">Request</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+                        {getTags(props.tag)}
+                    </div>
+                </Card.Text>
+                <Button variant="primary" className="align-self-auto">Request</Button>
+            </Card.Body>
+        </Card>
     );
 }
 
