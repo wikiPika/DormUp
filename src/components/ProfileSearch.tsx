@@ -9,25 +9,30 @@ function ProfileSearch(props) {
 
     return (
         <div>
-            <Jumbotron>
-                <h1>Find a Dormmate</h1>
-                <p>Search for your best fit based on interests, location, and more!</p>
+            <Jumbotron >
+                <h1 style={{
+                    fontSize: "6vmin",
+                }}>Find a Dormmate</h1>
+                <p style={{
+                    fontSize: "3vmin",
+                }}>Search for your best fit based on interests, location, and more!</p>
             </Jumbotron>
             <Row>
-                <Col md={3} xs={6} style={{
+                <Col md={4} xs={6} style={{
                     margin: "0 auto",
 
                 }}>
                     <div style={{
                         textAlign: "center",
-                        fontSize: "24px",
+                        fontSize: "3vmin",
                         fontWeight: "bold",
                     }}>
                         Search Options
                     </div>
                     <Form>
                         <Form.Group controlId="searchTags" style={{
-                            textAlign: "center"
+                            textAlign: "center",
+                            fontSize: "2vmin"
                         }}>
                             <Form.Label>Tags</Form.Label>
                             <Form.Control placeholder="Enter here, separated by spaces" style={{
@@ -39,7 +44,7 @@ function ProfileSearch(props) {
                     </Form>
                 </Col>
 
-                <Col md={9} xs={6}>
+                <Col md={8} xs={6}>
                     {getTenProfiles()}
                 </Col>
             </Row>
